@@ -1,6 +1,6 @@
 # Graph Rendering
 
-This is a student project in which it is necessary to implement algorithms for breadth-first search and depth-first search on graphs, as well as their rendering. Programming language-Python 3.7
+This is a student project in which it is necessary to implement algorithms for breadth-first search and depth-first search on graphs, as well as their rendering. Programming language is Python 3.7
 
 ## Installation
 
