@@ -2,8 +2,8 @@ import random
 import numpy as np
 from graphviz import Digraph
 
-MIN_COUNT_NODES = 6
-MAX_COUNT_NODES = 10
+MIN_COUNT_NODES = 6  # 6
+MAX_COUNT_NODES = 10  # 10
 NO_WAY = 0
 IS_WAY = 1
 
