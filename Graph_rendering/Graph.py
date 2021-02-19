@@ -33,6 +33,6 @@ class Graph:
                     graph.edge(str(column), str(line))
         return graph
 
-    def draw_graph(self):
-        self.graphviz_graph.render(filename='Graph.gv', view=True)
+    def draw_graph(self, file_name='Graph.gv', view=True, cleanup=False):
+        self.graphviz_graph.render(filename=file_name, view=view, cleanup=cleanup)
         return
