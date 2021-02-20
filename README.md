@@ -1,3 +1,3 @@
-# Python-discipline-projects
+# Graph-rendering-projects
 
-Cycle of four projects in Python
+The first laboratory work in a cycle on the subject of User Interface Development
