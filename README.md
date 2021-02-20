@@ -36,7 +36,28 @@ All the vertices of the second layer were bypassed. The next layer is the third.
 
 ![Шаг 6](https://github.com/Brightest-Sunshine/-pictures-for-README-files/blob/master/pics/BFS_6.JPG)
 
-## Development team
+### DFS
+We will also give an example of depth-first traversal of the graph.
+
+```python
+    Algorithms.DFS(graph, visited, 0)
+  # Algorithms.BFS(graph, visited, 0)
+```
+
+Initially, the program generated the following graph:
+![Инициализация графа](https://github.com/Brightest-Sunshine/-pictures-for-README-files/blob/master/pics/DFS_0.JPG)
+
+We start the traversal from the zero top.
+![Шаг_1](https://github.com/Brightest-Sunshine/-pictures-for-README-files/blob/master/pics/DFS_1.JPG)
+
+We continue to go down lower and lower until there are peaks that we can get to.
+![Шаг_2](https://github.com/Brightest-Sunshine/-pictures-for-README-files/blob/master/pics/DFS_2.JPG)
+![Шаг_3](https://github.com/Brightest-Sunshine/-pictures-for-README-files/blob/master/pics/DFS_3.JPG)
+![Шаг_4](https://github.com/Brightest-Sunshine/-pictures-for-README-files/blob/master/pics/DFS_4.JPG)
+![Шаг_5](https://github.com/Brightest-Sunshine/-pictures-for-README-files/blob/master/pics/DFS_5.JPG)
+![Шаг_6](https://github.com/Brightest-Sunshine/-pictures-for-README-files/blob/master/pics/DFS_6.JPG)
+
+# Development team
 1. Mamaeva Anastasia
 2. Vedenichev Dmitry
 
