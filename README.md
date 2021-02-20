@@ -12,5 +12,3 @@ In order for our program to work after downloading, you must additionally instal
 1. Mamaeva Anastasia
 2. Vedenichev Dmitry
 
-
-![Image alt](https://github.com/Brightest-Sunshine/-pictures-for-README-files/blob/master/pics/graph_1.JPG)
