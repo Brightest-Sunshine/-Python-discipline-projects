@@ -9,7 +9,11 @@ This is a student project in which it is necessary to implement algorithms for b
 In order for our program to work after downloading, you must additionally install a third-party library. To download, follow this link [Graphviz](https://graphviz.org/download/). When installing, add the path to graphviz in PATH
 
 ## Results of the program
-Two graph traversal algorithms were implemented in the process. Each time the program is run, a new random graph is always generated with the number of vertices not exceeding 10. Then the steps begin to be drawn depending on which algorithm is selected. In the breadth-first graph traversal, each layer is marked with its own specific color.
+In the process, two graph traversal algorithms were implemented. Each time the program is run, a new random graph with a maximum of 10 vertices is always generated. Then the steps start to be drawn depending on which algorithm is selected. The results appear in a separate folder named "BFS_result" or "DFS_result". 
+
+### BFS
+Consider the operation of the breadth-first traversal algorithm.
+When the graph is first traversed by width, each layer is marked with its own specific color.
 
 ```python
   # Algorithms.DFS(graph, visited, 0)
