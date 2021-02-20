@@ -1,0 +1,7 @@
+flake8
+pytest
+collections
+random
+numpy
+graphviz
+unittest
