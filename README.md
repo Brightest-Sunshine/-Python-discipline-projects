@@ -1,6 +1,6 @@
 The first laboratory work in a cycle on the subject of User Interface Development
 
-# Developers
+## Developers
 1. Mamaeva Anastasia
 2. Vedenichev Dmitry
 
