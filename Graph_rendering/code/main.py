@@ -1,4 +1,4 @@
-from Graph_rendering import Algorithms, Graph
+from code import Algorithms, Graph
 
 if __name__ == '__main__':
     graph = Graph.Graph()
