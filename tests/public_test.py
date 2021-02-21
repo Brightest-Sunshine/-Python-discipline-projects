@@ -1,6 +1,6 @@
 import unittest
-from code import Algorithms
-from code import Graph
+from graph import Algorithms
+from graph import Graph
 
 
 class TestG(unittest.TestCase):

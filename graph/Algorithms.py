@@ -1,5 +1,5 @@
 import collections
-from code import Graph
+from graph import Graph
 
 NODE_COLOR = "red"
 NODE_COLORS = ["red", "blue", "green", "orange", "grey", "pink"]
