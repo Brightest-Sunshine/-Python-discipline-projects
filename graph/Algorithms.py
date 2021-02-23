@@ -10,6 +10,14 @@ BFS_FOLDER = 'BFS_result\BFS_step_'
 
 
 def DFS(graph: Graph, visited, node, counter=0, test_running=False):
+    """
+    :param graph: class object: The graph in which to run DFS
+    :param visited: set: Numbers of visited nodes
+    :param node: int: number of the current node
+    :param counter: int: the chronological number of the node from the launch node
+    :param test_running:bool : True if you running test. To prevent file creating
+    :return: counter :return counter of the deepest visited node
+    """
     if node not in visited:
         counter += 1
         if not test_running:
@@ -23,6 +31,14 @@ def DFS(graph: Graph, visited, node, counter=0, test_running=False):
 
 
 def BFS(graph: Graph, visited, node, test_running=False):
+    """
+
+    :param graph:  class object: The graph in which to run BFS
+    :param visited: set: Numbers of visited nodes
+    :param node: int: number of node from we run BFS
+    :param test_running: bool : True if you running test. To prevent file creating
+    :return: set of visited node if test_running False, else list[] path with [[visited_node, layer]]
+    """
     path = []
     visited.add(node)
     if test_running:
