@@ -3,8 +3,8 @@ import os
 
 PATH = 'gifs\\'
 FORMAT = '.gif'
-FORMAT_POSITION = 0  # В каком месте  в названии файла находится тип (BFS, DFS)
-DELIMITER = "_"  # Чем разделяются параметры в названии файла
+FORMAT_POSITION = 0  # Where in the file name is the type (BFS, DFS)
+DELIMITER = "_"  # What separates the parameters in the file name?
 GIF_SPEED = 0.5
 
 
@@ -14,6 +14,7 @@ def make_gif_from_files(file_names):  # get file names(png), create gif file.
         for file_name in file_names:
             image = imageio.imread(file_name)
             writer.append_data(image)
+    print("Finish ", file_loc)
     return
 
 

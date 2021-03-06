@@ -2,7 +2,7 @@ import random
 import numpy as np
 from graphviz import Digraph
 
-MIN_COUNT_NODES = 6 #6 10
+MIN_COUNT_NODES = 6  # 6 10
 MAX_COUNT_NODES = 10
 NO_WAY = 0
 IS_WAY = 1
@@ -24,6 +24,14 @@ class Graph:
                     nodes.append(line)
             adjacency_list[column] = nodes
         return adjacency_list
+
+    def copy(self):  # make copy with different graphviz
+        copy_graph = Graph()
+        copy_graph.count_nodes = self.count_nodes
+        copy_graph.adjacency_matrix = self.adjacency_matrix
+        copy_graph.adjacency_list = self.adjacency_list
+        copy_graph.graphviz_graph = copy_graph.init_graphviz()
+        return copy_graph
 
     def init_graphviz(self):
         graph = Digraph('G', filename='Graph.gv', format='png')

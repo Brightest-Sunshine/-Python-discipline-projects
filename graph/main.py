@@ -7,8 +7,10 @@ if __name__ == '__main__':
 
     graph.draw_graph()
     random_node = random.randint(0, graph.count_nodes - 1)  #
+    path = list()
+    copy_graph = graph.copy()  # So as not to change the colors in the main graph!
+    Algorithms.DFS_gif(copy_graph, path, random_node)
+
+    copy_graph = graph.copy()
     visited = set()
-    Algorithms.DFS_gif(graph, visited, random_node)
-    graph.draw_graph()
-    visited = set()
-    #Algorithms.BFS_gif(graph, visited, random_node)  # TODO Убрать что основной граф меняется в процессе прогона
+    path = Algorithms.BFS_gif(copy_graph, visited, random_node)
