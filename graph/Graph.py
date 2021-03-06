@@ -2,7 +2,7 @@ import random
 import numpy as np
 from graphviz import Digraph
 
-MIN_COUNT_NODES = 6
+MIN_COUNT_NODES = 6 #6 10
 MAX_COUNT_NODES = 10
 NO_WAY = 0
 IS_WAY = 1
@@ -26,7 +26,7 @@ class Graph:
         return adjacency_list
 
     def init_graphviz(self):
-        graph = Digraph('G', filename='Graph.gv')
+        graph = Digraph('G', filename='Graph.gv', format='png')
         for column in range(self.count_nodes):
             for line in range(self.count_nodes):
                 if self.adjacency_matrix[column][line] == IS_WAY:
