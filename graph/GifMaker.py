@@ -2,6 +2,7 @@ import imageio
 import os
 
 PATH = 'gifs\\'
+TEST_PATH = 'GifMaker_folder\\'
 FORMAT = '.gif'
 FORMAT_POSITION = 0  # Where in the file name is the type (BFS, DFS)
 DELIMITER = "_"  # What separates the parameters in the file name?
@@ -18,14 +19,17 @@ def make_gif_from_files(file_names):  # get file names(png), create gif file.
     return
 
 
-def gif_name(file):  # find out type of gif and how many of this type we already have
+def gif_name(file, test=False):  # find out type of gif and how many of this type we already have
     elem = file.split(DELIMITER)
     type_of_gif = elem[FORMAT_POSITION]
-    return type_of_gif + DELIMITER + str(count_same_types(type_of_gif))
+    return type_of_gif + DELIMITER + str(count_same_types(type_of_gif, test))
 
 
-def count_same_types(type_of_gif):  # count how many files of this type exist in our directory
-    files = os.listdir(path=PATH)
+def count_same_types(type_of_gif, test=False):  # count how many files of this type exist in our directory +1
+    if test:
+        files = os.listdir(path=TEST_PATH)
+    else:
+        files = os.listdir(path=PATH)
     count = 1
     for file in files:
         spl = file.split(DELIMITER)
