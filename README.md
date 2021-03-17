@@ -78,7 +78,7 @@ We continue to go down lower and lower until there are peaks that we can get to.
 ![Step_6](https://github.com/Brightest-Sunshine/-pictures-for-README-files/blob/master/pics/DFS_6.JPG)
 
 # Development team
-1. Mamaeva Anastasia
+1. Mamaeva Anastasia\n
    work email: mamaeva.as@edu.spbstu.ru
    phone number: 8-987-615-01-94
 2. Vedenichev Dmitry
