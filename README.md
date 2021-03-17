@@ -79,7 +79,10 @@ We continue to go down lower and lower until there are peaks that we can get to.
 
 # Development team
 1. Mamaeva Anastasia
+
      work email: mamaeva.as@edu.spbstu.ru
+    
      phone number: 8-987-615-01-94
 2. Vedenichev Dmitry
+
      work email: vedenichev.da@edu.spbstu.ru 
