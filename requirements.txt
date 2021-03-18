@@ -1,6 +1,5 @@
 flake8
 pytest
-numpy~=1.16.4
+numpy
 graphviz~=0.16
-
 imageio~=2.9.0
