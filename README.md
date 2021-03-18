@@ -26,6 +26,8 @@ When the graph is first traversed by width, each layer is marked with its own sp
     from graphviz import Digraph
     from graph import Graph
     ...
+    graph = Graph.Graph()
+    visited = list()
   # Algorithms.DFS(graph, visited, 0)
     Algorithms.BFS(graph, visited, 0)
 ```
@@ -53,6 +55,8 @@ We will also give an example of depth-first traversal of the graph.
     from graphviz import Digraph
     from graph import Graph
     ...
+    graph = Graph.Graph()
+    visited = list()
     Algorithms.DFS(graph, visited, 0)
   # Algorithms.BFS(graph, visited, 0)
 ```
@@ -82,7 +86,6 @@ We continue to go down lower and lower until there are peaks that we can get to.
 
      work email: mamaeva.as@edu.spbstu.ru
     
-     phone number: 8-987-615-01-94
 2. Vedenichev Dmitry
 
      work email: vedenichev.da@edu.spbstu.ru 
