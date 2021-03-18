@@ -28,6 +28,8 @@ def DFS(graph: Graph, visited: list, node: int, no_images: bool = False, created
     :param created_files: list[] of created files if we remembering them(example for gif)
     :return visited: list: Numbers of visited nodes, basically path
     """
+    if graph is None or graph.adjacency_list is None:
+        return 1
     if node not in visited:
         visited.append(node)
         counter = len(visited)
@@ -52,6 +54,8 @@ def BFS(graph: Graph, visited: list, node: int, no_images: bool = False, created
     :param created_files: list[] of created files if we remembering them
     :return: list[] path with [[visited_node, layer]]
     """
+    if graph is None or graph.adjacency_list is None:
+        return 1
     path = []
     visited.append(node)
     if no_images:
