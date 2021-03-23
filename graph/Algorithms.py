@@ -11,15 +11,15 @@ DFS_FOLDER = 'DFS_result\DFS_step_'
 BFS_FOLDER = 'BFS_result\BFS_step_'
 
 
-def gif(graph: Graph, visited: list, node: int, method, no_images: bool = False, test: bool = False):
+def gif(graph: Graph,visited: list, node: int, method, no_images: bool = False, test: bool = False):
     created_files = []
-    path = method(graph, visited, node, created_files=created_files, no_images=no_images)
+    path = method(graph, node, visited=visited, created_files=created_files, no_images=no_images)
     if not test:
         GifMaker.make_gif_from_files(created_files)  # Creating GIFs from created files
     return path
 
 
-def DFS(graph: Graph, visited: list, node: int, no_images: bool = False, created_files: list = None):
+def DFS(graph: Graph, node: int, visited: list = None, no_images: bool = False, created_files: list = None):
     """
     :param graph: class object: The graph in which to run DFS
     :param visited: list: Numbers of visited nodes, basically path
@@ -28,6 +28,8 @@ def DFS(graph: Graph, visited: list, node: int, no_images: bool = False, created
     :param created_files: list[] of created files if we remembering them(example for gif)
     :return visited: list: Numbers of visited nodes, basically path
     """
+    if visited is None:  # write this way because of mutable default
+        visited = []
     if graph is None or graph.adjacency_list is None:
         return 1
     if node not in visited:
@@ -40,11 +42,11 @@ def DFS(graph: Graph, visited: list, node: int, no_images: bool = False, created
             graph.graphviz_graph.node(str(node), fillcolor=NODE_COLOR, style=STYLE)  # mark node
             graph.draw_graph(file_name=file_name, view=False, cleanup=True)  # Drawing the current step
         for neighbour in graph.adjacency_list[node]:
-            visited = DFS(graph, visited, neighbour, no_images, created_files)
+            visited = DFS(graph, neighbour, no_images=no_images, created_files=created_files, visited=visited)
     return visited
 
 
-def BFS(graph: Graph, visited: list, node: int, no_images: bool = False, created_files: list = None):
+def BFS(graph: Graph, node: int, visited=None, no_images: bool = False, created_files: list = None):
     """
 
     :param graph:  class object: The graph in which to run BFS
@@ -54,6 +56,8 @@ def BFS(graph: Graph, visited: list, node: int, no_images: bool = False, created
     :param created_files: list[] of created files if we remembering them
     :return: list[] path with [[visited_node, layer]]
     """
+    if visited is None:  # write this way because of mutable default
+        visited = list()
     if graph is None or graph.adjacency_list is None:
         return 1
     path = []

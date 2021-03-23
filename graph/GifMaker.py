@@ -1,8 +1,12 @@
 import imageio
 import os
-
-PATH = 'gifs/'
-TEST_PATH = 'tests/GifMaker_folder/'
+LINUX = True
+if LINUX:
+    PATH = 'gifs/'
+    TEST_PATH = 'tests/GifMaker_folder/'
+else:
+    PATH = 'gifs\\'
+    TEST_PATH = 'GifMaker_folder\\'
 FORMAT = '.gif'
 FORMAT_POSITION = 0  # Where in the file name is the type (BFS, DFS)
 DELIMITER = "_"  # What separates the parameters in the file name?
