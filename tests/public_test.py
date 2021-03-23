@@ -7,7 +7,7 @@ from graph import GifMaker
 
 LINUX = True
 if LINUX:
-    GIF_MAKER_TEST_PATH = 'tests/GifMaker_folder/'
+    GIF_MAKER_TEST_PATH = 'tests/'
 else:
     GIF_MAKER_TEST_PATH = 'GifMaker_folder\\'
 

@@ -3,7 +3,7 @@ import os
 LINUX = True
 if LINUX:
     PATH = 'gifs/'
-    TEST_PATH = 'tests/GifMaker_folder/'
+    TEST_PATH = 'tests/'
 else:
     PATH = 'gifs\\'
     TEST_PATH = 'GifMaker_folder\\'
