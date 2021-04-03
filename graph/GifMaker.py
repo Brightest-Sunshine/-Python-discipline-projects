@@ -6,7 +6,7 @@ if LINUX:
     TEST_PATH = 'tests/'
 else:
     PATH = 'gifs\\'
-    TEST_PATH = 'GifMaker_folder\\'
+    TEST_PATH = None
 FORMAT = '.gif'
 FORMAT_POSITION = 0  # Where in the file name is the type (BFS, DFS)
 DELIMITER = "_"  # What separates the parameters in the file name?
