@@ -18,20 +18,20 @@ To connect all the dependencies, you need to write in the terminal
 ## Results of the program
 In the process, two graph traversal algorithms were implemented. Each time the program is run, a new random graph with a maximum of 10 vertices is always generated. Then the steps start to be drawn depending on which algorithm is selected. The results appear in a separate folder named "BFS_result" or "DFS_result". After that, gifs are created from the pictures obtained earlier.
 
-![First_GIF_BFS](https://github.com/Brightest-Sunshine/pictures-for-README-files/blob/master/pics/BFS_1.gif)
-![Second_GIF_BFS](https://github.com/Brightest-Sunshine/pictures-for-README-files/blob/master/pics/BFS_2.gif)
+### BFS GIF
+![GIF_BFS](https://github.com/Brightest-Sunshine/pictures-for-README-files/blob/master/pics/BFS_2.gif)
 
-![First_GIF_DFS](https://github.com/Brightest-Sunshine/pictures-for-README-files/blob/master/pics/DFS_1.gif)
-![Second_GIF_DFS](https://github.com/Brightest-Sunshine/pictures-for-README-files/blob/master/pics/DFS_2.gif)
+### DFS GIF
+![GIF_DFS](https://github.com/Brightest-Sunshine/pictures-for-README-files/blob/master/pics/DFS_2.gif)
 
 ***
 ## Examples of calling functions
 ### Graph creation
 ```python
     from graph import Graph
-    graph = Graph.GraphBuilder.create_random_directed_graph()  # Random directed graph
-    graph = Graph.Graph(2, {1: [2], 2: []})  # Passing node count and adjacency list
-    graph.add_edge(1, 2)  # Adding an edge from the first node to the second. If the node number is missing in the column all nodes up to the number of the created one inclusive
+    graph = Graph.GraphBuilder.create_random_directed_graph() 
+    graph = Graph.Graph(2, {1: [2], 2: []})
+    graph.add_edge(1, 2)
 ```
 
 ### BFS
