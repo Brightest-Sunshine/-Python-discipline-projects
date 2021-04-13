@@ -1,6 +1,6 @@
 import imageio
 import os
-LINUX = True
+LINUX = False
 if LINUX:
     PATH = 'gifs/'
     TEST_PATH = 'tests/'
@@ -20,7 +20,6 @@ def make_gif_from_files(file_names):  # get file names(png), create gif file.
             image = imageio.imread(file_name)
             writer.append_data(image)
     print("Finish ", file_loc)
-    return
 
 
 def gif_name(file, test=False):  # find out type of gif and how many of this type we already have

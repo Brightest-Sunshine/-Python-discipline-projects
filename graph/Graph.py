@@ -1,4 +1,5 @@
 import random
+from collections import defaultdict
 from dataclasses import dataclass
 
 import numpy as np
@@ -15,7 +16,7 @@ NODE_COLOR = "red"
 @dataclass
 class Graph:
     count_nodes: int
-    adjacency_list: dict
+    adjacency_list: defaultdict(list)
 
     def add_edge(self, from_node, to_node):
         if from_node >= self.count_nodes:
@@ -75,3 +76,18 @@ class GraphBuilder:
                 if graph.adjacency_matrix[column][line] == IS_WAY:
                     graphviz.edge(str(column), str(line))
         return graphviz
+
+
+if __name__ == '__main__':
+    graph = Graph(0, {})
+    graph.add_edge(4, 3)
+    graph.add_edge(2, 3)
+    graph.add_edge(4, 7)
+    graph.add_edge(1, 1)
+    graph.add_edge(1, 3)
+    graph.add_edge(7, 0)
+    graph.add_edge(8, 6)
+    graph.add_edge(5, 8)
+    graph.add_edge(4, 8)
+    graph.add_edge(2, 1)
+    Graph.draw_graph(graph)

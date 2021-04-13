@@ -11,6 +11,8 @@ if LINUX:
 else:
     GIF_MAKER_TEST_PATH = ''
 
+graph = None
+
 
 @contextmanager
 def tempOpen(path, mode):
@@ -24,49 +26,51 @@ def tempOpen(path, mode):
         os.remove(path)
 
 
+#
+def setUp():
+    global graph
+    graph = Graph.Graph(0, dict())
+
+
 class TestAlgorithms(unittest.TestCase):
     def test_DFS_empty_input(self):
         msg = "DFS dont check empty input"
-        graph = Graph.GraphBuilder.create_random_directed_graph()
+
         graph.adjacency_list = None
         count = Algorithms.DFS(graph, 0)
-        self.assertEqual(count, 1, msg=msg)
+        self.assertEqual(count, [], msg=msg)
 
     def test_DFS_path(self):
         # In algo you should run DFS using adj_list, from beginning to end
         msg = "DFS return different path from expected"
-        graph = Graph.GraphBuilder.create_random_directed_graph()
         graph.adjacency_list = [[1, 2], [3, 1], [1], [2], [0, 5], [1, 4]]
         path = Algorithms.DFS(graph, 4)
         self.assertEqual([4, 0, 1, 3, 2, 5], path, msg=msg + "expected [4, 0, 1, 3, 2, 5]")
 
     def test_DFS_not_all_node_path(self):
         msg = "DFS return different path from expected"
-        graph = Graph.GraphBuilder.create_random_directed_graph()
         graph.adjacency_list = [[1, 2], [3, 1], [1], [2], [0, 5], [1, 4]]
         path = Algorithms.DFS(graph, 0)
         self.assertEqual(path, [0, 1, 3, 2], msg=msg + " expected [0, 1, 3, 2]")
 
     def test_BFS(self):
         msg = "BFS return different path from expected, path format [[node, layer]]"
-        graph = Graph.GraphBuilder.create_random_directed_graph()
         graph.adjacency_list = [[0, 1, 2], [3], [4], [0], [0]]
         path = Algorithms.BFS(graph, 0)
         self.assertEqual(path, [[0, 0], [1, 2], [2, 2], [3, 3], [4, 3]], msg=msg)
 
     def test_BFS_empty_input(self):
         msg = "BFS dont check empty input"
-        graph = Graph.GraphBuilder.create_random_directed_graph()
         graph.adjacency_list = None
         output = Algorithms.BFS(graph, 0)
-        self.assertEqual(output, 1, msg=msg)
+        self.assertEqual(output, [], msg=msg)
 
 
 class TestGraph(unittest.TestCase):
     def test_graph_builder(self):
         msg = "Incorrect matrix for this nodes"
-        graph = Graph.GraphBuilder.create_random_directed_graph()
-        self.assertEqual(graph.count_nodes, len(graph.adjacency_list), msg=msg)
+        local_graph = Graph.GraphBuilder.create_random_directed_graph()  # need new to check if he build ok
+        self.assertEqual(local_graph.count_nodes, len(local_graph.adjacency_list), msg=msg)
 
 
 class TestGifMaker(unittest.TestCase):
@@ -121,14 +125,19 @@ class TestAddEdge(unittest.TestCase):
 class TestAlgorithmsGif(unittest.TestCase):
     def test_gif_BFS(self):
         msg = "wrong BFS working from gif"
-        graph = Graph.GraphBuilder.create_random_directed_graph()
-        graph.adjacency_list = [[0, 1, 2], [3], [4], [0], [0]]
-        path = Algorithms.gif(graph, 0, Algorithms.BFS, test=True)
+        test_adj_list = [[0, 1, 2], [3], [4], [0], [0]]
+        local_graph = Graph.Graph(len(test_adj_list), dict())
+        local_graph.adjacency_list = test_adj_list
+        path = Algorithms.gif(local_graph, 0, Algorithms.BFS, test=True)
         self.assertEqual(path, [[0, 0], [1, 2], [2, 2], [3, 3], [4, 3]], msg=msg)
 
     def test_gif_DFS(self):
         msg = "wrong DFS working from gif"
-        graph = Graph.GraphBuilder.create_random_directed_graph()
-        graph.adjacency_list = [[1, 2], [3, 1], [1], [2], [0, 5], [1, 4]]
-        path = Algorithms.gif(graph, 0, Algorithms.DFS, test=True)
+        test_adj_list = [[1, 2], [3, 1], [1], [2], [0, 5], [1, 4]]
+        local_graph = Graph.Graph(len(test_adj_list), dict())
+        local_graph.adjacency_list = test_adj_list
+        path = Algorithms.gif(local_graph, 0, Algorithms.DFS, test=True)
         self.assertEqual(path, [0, 1, 3, 2], msg=msg)
+
+
+setUp()
