@@ -10,7 +10,6 @@ GIF_SPEED = 0.5
 
 def make_gif_from_files(file_names, path):  # get file names(png), create gif file.
     file_loc = path + gif_name(path, file_names[0]) + FORMAT
-    print(file_loc)
     with imageio.get_writer(file_loc, mode='I', duration=GIF_SPEED) as writer:  # create gif from files
         for file_name in file_names:
             image = imageio.imread(file_name)
