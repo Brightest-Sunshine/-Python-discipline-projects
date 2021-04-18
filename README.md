@@ -30,7 +30,7 @@ In the process, two graph traversal algorithms were implemented. Each time the p
 ```python
     from graph import Graph
     graph = Graph.GraphBuilder.create_random_directed_graph() 
-    graph = Graph.Graph(2, {1: [2], 2: []})
+    another_graph = Graph.Graph(2, {1: [2], 2: []})
     graph.add_edge(1, 2)
 ```
 

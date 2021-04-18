@@ -19,19 +19,13 @@ class Graph:
     adjacency_list: defaultdict(list)
 
     def add_edge(self, from_node, to_node):
-        if from_node >= self.count_nodes:
-            for i in range(self.count_nodes, from_node):
-                self.adjacency_list[i] = []
+        this = self.adjacency_list.get(from_node, [])
+        this.append(to_node)
+        self.adjacency_list[from_node] = this
+        if from_node >= self.count_nodes:  # to keep count true
             self.count_nodes = from_node + 1
-            self.adjacency_list[from_node] = [to_node]
-        else:
-            self.adjacency_list[from_node].append(to_node)
-
         if to_node >= self.count_nodes:
-            for i in range(self.count_nodes, to_node):
-                self.adjacency_list[i] = []
             self.count_nodes = to_node + 1
-            self.adjacency_list[to_node] = []
         return
 
     @staticmethod
@@ -43,7 +37,7 @@ class Graph:
             graphviz.node(str(node))
             if node in visited:
                 graphviz.node(str(node), fillcolor=NODE_COLOR, style=STYLE)
-            for neighbor in graph.adjacency_list[node]:
+            for neighbor in graph.adjacency_list.get(node, []):
                 graphviz.edge(str(node), str(neighbor))
         graphviz.render(filename=file_name, view=view, cleanup=cleanup)
 
@@ -81,6 +75,7 @@ class GraphBuilder:
 if __name__ == '__main__':
     graph = Graph(0, {})
     graph.add_edge(4, 3)
+    print(graph.adjacency_list)
     graph.add_edge(2, 3)
     graph.add_edge(4, 7)
     graph.add_edge(1, 1)
@@ -90,4 +85,6 @@ if __name__ == '__main__':
     graph.add_edge(5, 8)
     graph.add_edge(4, 8)
     graph.add_edge(2, 1)
+    graph.add_edge(11, 12)
+    graph.add_edge(13, 17)
     Graph.draw_graph(graph)

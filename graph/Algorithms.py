@@ -9,16 +9,19 @@ IMAGE_FORMAT = '.png'
 STYLE = "filled"
 DFS_FOLDER = 'DFS_result\DFS_step_'
 BFS_FOLDER = 'BFS_result\BFS_step_'
+LINUX = False
+if LINUX:
+    PATH = 'gifs/'
+    TEST_PATH = 'tests/'
+else:
+    PATH = 'gifs\\'
+    TEST_PATH = None
 
 
-def gif(graph: Graph, node: int, method, test: bool = False):
+def gif(graph: Graph, node: int, method, result_path: str = PATH):
     created_files = []
-    if test:
-        path = method(graph, node, created_files=created_files)
-    else:
-        path = method(graph, node, created_files=created_files, draw=graph.draw_graph)
-    if not test:
-        GifMaker.make_gif_from_files(created_files)  # Creating GIFs from created files
+    path = method(graph, node, created_files=created_files, draw=graph.draw_graph)
+    GifMaker.make_gif_from_files(created_files, result_path)
     return path
 
 
@@ -69,24 +72,21 @@ def BFS(graph: Graph, node: int, created_files: list = None, draw=lambda graph, 
     if graph is None or graph.adjacency_list is None:
         return []
     visited = [node]
-    file_name = lambda countr: BFS_FOLDER + str(counter) + FORMAT
+    file_name = lambda count: BFS_FOLDER + str(count) + FORMAT
 
-    path = [[node, 0]]
+    path = [node]
     counter = 1
-    # file_name = BFS_FOLDER + str(counter) + FORMAT
-    # print(file_name(counter))
     created_files.append(file_name(counter) + IMAGE_FORMAT)
     draw(graph, visited=visited, file_name=file_name(counter))
-    layer_count = 1
-    queue = collections.deque([[node, layer_count]])  # We put the current vertex, and the current color
+    queue = collections.deque([node])  # We put the current vertex, and the current color
     while queue:
-        vertex, layer_count = queue.popleft()
+        vertex = queue.popleft()
         for neighbour in graph.adjacency_list[vertex]:
             if neighbour not in visited:
-                # file_name = BFS_FOLDER + str(counter) + FORMAT
+                counter += 1
                 visited.append(neighbour)
                 created_files.append(file_name(counter) + IMAGE_FORMAT)
                 draw(graph, visited=visited, file_name=file_name(counter))
-                path.append([neighbour, layer_count + 1])  # Remember that we were here
-                queue.append([neighbour, layer_count + 1])  # Adding a neighbor to then walk out of it
+                path.append(neighbour)  # Remember that we were here
+                queue.append(neighbour)  # Adding a neighbor to then walk out of it
     return path
