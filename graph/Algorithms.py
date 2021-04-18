@@ -9,7 +9,7 @@ IMAGE_FORMAT = '.png'
 STYLE = "filled"
 DFS_FOLDER = 'DFS_result\DFS_step_'
 BFS_FOLDER = 'BFS_result\BFS_step_'
-LINUX = False
+LINUX = True
 if LINUX:
     PATH = 'gifs/'
     TEST_PATH = 'tests/'

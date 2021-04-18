@@ -9,7 +9,7 @@ from graph import Algorithms
 from graph import Graph
 from graph import GifMaker
 
-LINUX = False
+LINUX = True
 GIF_MAKER_TEST_PATH = ""
 
 graph = None
