@@ -15,7 +15,7 @@ graph = None
 
 
 def setUp():
-    global graph, TEST_PATH
+    global graph, TEST_PATH, ROOT_PATH
     graph = Graph.Graph(dict())
     timestamp = time.strftime('%Y%m%d-%H%M%S')
     print(timestamp)
@@ -24,7 +24,6 @@ def setUp():
         TEST_PATH = 'tests/' + timestamp + '/'
         os.makedirs(TEST_PATH, exist_ok=True)
     else:
-        ROOT_PATH = ''
         TEST_PATH = timestamp + '/'
         os.makedirs(TEST_PATH, exist_ok=True)
 
@@ -62,10 +61,6 @@ class TestAlgorithms(unittest.TestCase):
         output = Algorithms.BFS(graph, 0)
         self.assertEqual(output, [], msg=msg)
 
-
-class TestGifMaker(unittest.TestCase):
-    def test_create_from_graph(self):
-        pass
 
 
 class TestRunFromCLI(unittest.TestCase):
@@ -150,7 +145,7 @@ class TestGraphBuilder(unittest.TestCase):
     def test_create_from_file(self):
         msg = "Wrong creating file from graph"
 
-        example_file = TEST_EXAMPLES + "default_graph.txt"
+        example_file = ROOT_PATH + "default_graph.txt"
         res = Graph.GraphBuilder.create_from_file(example_file)
         self.assertEqual(res.adjacency_list, {1: [2, 0], 2: [3], 3: [0], 0: [5], 5: [1]}, msg=msg)
 
