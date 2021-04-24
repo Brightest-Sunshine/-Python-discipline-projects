@@ -1,4 +1,4 @@
-import imageio
+import imageio  # type: ignore
 from graph import Graph
 
 FORMAT = '.gif'

@@ -3,7 +3,7 @@ from collections import defaultdict
 from dataclasses import dataclass
 import argparse
 import numpy as np
-from graphviz import Digraph
+from graphviz import Digraph  # type: ignore
 from graph import GifMaker
 
 MIN_COUNT_NODES = 6
@@ -17,7 +17,7 @@ LINUX = True
 
 @dataclass
 class Graph:
-    adjacency_list: defaultdict(list)
+    adjacency_list: defaultdict(list)  # type: ignore
 
     def add_edge(self, from_node, to_node):
         this = self.adjacency_list.get(from_node, [])
