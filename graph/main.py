@@ -1,6 +1,7 @@
 import random
 
 from graph import Algorithms, Graph
+from graph import GifMaker
 
 if __name__ == '__main__':
 
@@ -8,6 +9,14 @@ if __name__ == '__main__':
 
     graph.draw_graph(graph)
     functions = [Algorithms.DFS, Algorithms.BFS]
+    save_paths = ['BFS_res', 'DFS_res']
     for fun in functions:
-        random_node = random.randint(0, graph.count_nodes - 1)
-        path = Algorithms.gif(graph, random_node, fun)
+        random_node = random.choice(list(graph.adjacency_list.keys()))
+        res_gif = Algorithms.gif(graph, random_node, fun)
+        GifMaker.save(res_gif, save_paths.pop())
+
+# TODO package sphinx и построим документацию (???)
+# TODO examples
+# TODO rewrite Readme
+# todo Комментарии
+# TODO fix mypy

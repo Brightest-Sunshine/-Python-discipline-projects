@@ -38,16 +38,16 @@ In the process, two graph traversal algorithms were implemented. Each time the p
 ```python
     from graph import Algorithms, Graph
     graph = Graph.GraphBuilder.create_random_directed_graph()
-    number_of_start_node = 0
-    path = Algorithms.BFS(graph, number_of_start_node)
+    start_node_ind = 0
+    path = Algorithms.BFS(graph, start_node_ind)
 ```
 
 ### DFS
 ```python
     from graph import Algorithms, Graph
     graph = Graph.GraphBuilder.create_random_directed_graph()
-    number_of_start_node = 0
-    path = Algorithms.DFS(graph, number_of_start_node)
+    start_node_ind = 0
+    path = Algorithms.DFS(graph, start_node_ind)
 ```
 
 ### GIF creation

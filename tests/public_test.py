@@ -1,44 +1,29 @@
 import os
 import time
 import unittest
-# import tempfile.NamedTemporaryFile as temp
-from collections import defaultdict
-from tempfile import NamedTemporaryFile as temp
+from collections import defaultdict, namedtuple
 from contextlib import contextmanager
 from graph import Algorithms
 from graph import Graph
 from graph import GifMaker
 
-LINUX = True
-GIF_MAKER_TEST_PATH = ""
-
+LINUX = False
+TEST_PATH = ""
+TEST_EXAMPLES = ""
 graph = None
 
 
-@contextmanager
-def tempOpen(path, mode):
-    # if this fails there is nothing left to do anyways
-    file = open(path, mode)
-
-    try:
-        yield file
-    finally:
-        file.close()
-        os.remove(path)
-
-
-#
 def setUp():
-    global graph, GIF_MAKER_TEST_PATH
-    graph = Graph.Graph(0, dict())
+    global graph, TEST_PATH
+    graph = Graph.Graph(dict())
     timestamp = time.strftime('%Y%m%d-%H%M%S')
     print(timestamp)
     if LINUX:
-        GIF_MAKER_TEST_PATH = 'tests/' + timestamp + '/'
-        os.makedirs(GIF_MAKER_TEST_PATH, exist_ok=True)
+        TEST_PATH = 'tests/' + timestamp + '/'
+        os.makedirs(TEST_PATH, exist_ok=True)
     else:
-        GIF_MAKER_TEST_PATH = timestamp + '/'
-        os.makedirs(GIF_MAKER_TEST_PATH, exist_ok=True)
+        TEST_PATH = timestamp + '/'
+        os.makedirs(TEST_PATH, exist_ok=True)
 
 
 class TestAlgorithms(unittest.TestCase):
@@ -75,95 +60,137 @@ class TestAlgorithms(unittest.TestCase):
         self.assertEqual(output, [], msg=msg)
 
 
-class TestGraph(unittest.TestCase):
-    def test_graph_builder(self):
-        msg = "Incorrect matrix for this nodes"
-        local_graph = Graph.GraphBuilder.create_random_directed_graph()  # need new to check if he build ok
-        self.assertEqual(local_graph.count_nodes, len(local_graph.adjacency_list), msg=msg)
-
-
 class TestGifMaker(unittest.TestCase):
+    def test_create_from_graph(self):
+        pass
 
-    def test_counter(self):
-        # function returns not how many same_types but number of this elem
-        msg = "GifMaker count_same_types count incorrect"
-        path = GIF_MAKER_TEST_PATH
-        with tempOpen(path + 'TYPE_1.txt', 'w'), tempOpen(path + 'TYPE_2.txt', 'w'):
-            count = GifMaker.count_same_types(path, 'TYPE')
-            self.assertEqual(count, 2 + 1, msg=msg)
 
-    def test_name_creator(self):
-        # creat temp files with special name to check how we calculate how many file of this type exist and how we
-        # create new names
-        msg = "GifMaker gif_name have problem with getting name of new gif"
-        path = GIF_MAKER_TEST_PATH
-        name_cases = ["TYPE_", "ONE_"]
-        name = lambda count: name_cases[0] + str(count) + '.txt'  # to create same named files with diffent numbers
-        with tempOpen(path + name(1), 'w'), tempOpen(path + name(2), 'w'), tempOpen(path + name(3), 'w'):
-            file_name = GifMaker.gif_name(path, name(0))
-            self.assertEqual(name_cases[0] + "4", file_name, msg=msg)
+class TestRunFromCLI(unittest.TestCase):
+    def setUp(self):
+        self.CLI_default_graph = Graph.RunFromCLI.set_and_run_input(None)
+        self.CLI_default_input = Graph.RunFromCLI.default_input
+        self.CLI_default_output = Graph.RunFromCLI.default_output
+        self.CLI_default_draw = False
+        self.msg_start_node = "Wrong CLI starting node results"
+        self.msg_input = "Wrong CLI input results"
+        self.msg_output = "Wrong CLI output results"
+        self.msg_method = "Wrong CLI method results"
+        self.msg_all = "Wrong CLI run from files results"
 
-        name = lambda count: name_cases[1] + str(count) + '.txt'
-        with tempOpen(path + name(1), 'w'), tempOpen(path + name(2), 'w'), tempOpen(path + name(3), 'w'), \
-                tempOpen(path + name(4), 'w'):
-            file_name = GifMaker.gif_name(path, name(0))
-            self.assertEqual(name_cases[1] + "5", file_name, msg=msg)
+    def test_find_start_node_not_None(self):
+        start_node = "1"
+        res = Graph.RunFromCLI.find_start_node(start_node, graph)
+        self.assertEqual(res, int(start_node), msg=self.msg_start_node)
+
+    def test_find_start_node_None(self):
+        start_node = None
+        this_graph = Graph.Graph({2: [], 1: []})
+        res = Graph.RunFromCLI.find_start_node(start_node, this_graph)
+        self.assertEqual(res, list(this_graph.adjacency_list.keys())[0], msg=self.msg_start_node)
+
+    def test_set_and_run_input_not_None(self):
+        this_input = TEST_EXAMPLES + "special_example.txt"
+        this_graph = Graph.RunFromCLI.set_and_run_input(this_input)
+        self.assertEqual(this_graph.adjacency_list, {1: [2, 0], 2: [3], 3: [0], 0: [5], 5: [1]}, msg=self.msg_input)
+
+    def test_set_and_run_input_None(self):
+        this_graph = Graph.RunFromCLI.set_and_run_input(None)
+        self.assertEqual(this_graph.adjacency_list, {0: [5], 1: [2, 0], 2: [3], 3: [0], 5: [1]}, msg=self.msg_input)
+
+    def test_set_and_run_method_not_None(self):
+        this_method = Algorithms.DFS
+        start = 0
+        res = Graph.RunFromCLI.set_and_run_method(self.CLI_default_graph, this_method, start, self.CLI_default_draw)
+        self.assertEqual(str(type(res[0])), "<class 'imageio.core.util.Array'>", msg=self.msg_method)
+
+    def test_set_and_run_method_None(self):
+        this_method = None
+        start = 0
+        res = Graph.RunFromCLI.set_and_run_method(self.CLI_default_graph, this_method, start, self.CLI_default_draw)
+        self.assertEqual(str(type(res[0])), "<class 'imageio.core.util.Array'>", msg=self.msg_method)
+
+    def test_set_and_run_output_None(self):
+        this_method = None
+        this_output = None
+        start = 0
+        res_gif = Graph.RunFromCLI.set_and_run_method(self.CLI_default_graph, this_method, start, self.CLI_default_draw)
+        Graph.RunFromCLI.set_and_run_output(this_output, res_gif)
+        if TEST_EXAMPLES == '':
+            self.assertTrue(Graph.RunFromCLI.default_output + ".gif" in os.listdir(), msg=self.msg_output)
+        else:
+            self.assertTrue(Graph.RunFromCLI.default_output + ".gif" in os.listdir(TEST_EXAMPLES), msg=self.msg_output)
+
+    def test_set_and_run_output_not_None(self):
+
+        file_name = "output_result"
+        this_output = TEST_PATH + file_name
+        this_method = None
+        start = 0
+        res_gif = Graph.RunFromCLI.set_and_run_method(self.CLI_default_graph, this_method, start, self.CLI_default_draw)
+        Graph.RunFromCLI.set_and_run_output(this_output, res_gif)
+        self.assertTrue(file_name + ".gif" in os.listdir(TEST_PATH), msg=self.msg_output)
+
+    def test_run_from_file(self):
+        this_input = self.CLI_default_input
+        file_name = "full_run_result"
+        this_output = TEST_PATH + file_name
+        this_method = None
+        draw = self.CLI_default_draw
+        start = 0
+        args = namedtuple('named_field_for_test', ['draw', 'output_path', 'input_path', 'method', 'starting_node'])
+        this_args = args(draw, this_output, this_input, this_method, start)
+        Graph.RunFromCLI.run_from_file(this_args)
+        self.assertTrue(file_name + ".gif" in os.listdir(TEST_PATH), msg=self.msg_all)
+
+
+class TestGraphBuilder(unittest.TestCase):
+    def test_create_from_file(self):
+        msg = "Wrong creating file from graph"
+
+        example_file = TEST_EXAMPLES + "default_graph.txt"
+        res = Graph.GraphBuilder.create_from_file(example_file)
+        self.assertEqual(res.adjacency_list, {1: [2, 0], 2: [3], 3: [0], 0: [5], 5: [1]}, msg=msg)
 
 
 class TestAddEdge(unittest.TestCase):
     def test_add_edge_of_exist_node(self):
         msg = "Problem creating edge of exist node"
-        graph = Graph.Graph(2, {0: [], 1: []})
+        graph = Graph.Graph({0: [], 1: []})
         graph.add_edge(0, 1)
         self.assertEqual({0: [1], 1: []}, graph.adjacency_list, msg)
 
     def test_add_non_exist_from_edge(self):
         msg = "Problem creating edge from non-exist node"
-        graph = Graph.Graph(2, {0: [], 1: []})
+        graph = Graph.Graph({0: [], 1: []})
         graph.add_edge(3, 1)
         self.assertEqual({0: [], 1: [], 3: [1]}, graph.adjacency_list, msg)
 
     def test_add_non_exist_to_edge(self):
         msg = "Problem creating edge to non-exist node"
-        graph = Graph.Graph(2, {0: [], 1: []})
+        graph = Graph.Graph({0: [], 1: []})
         graph.add_edge(1, 3)
-        self.assertEqual({0: [], 1: [3]}, graph.adjacency_list, msg)
+        self.assertEqual({0: [], 1: [3], 3: []}, graph.adjacency_list, msg)
 
     def test_all_non_exist(self):
         msg = "Problem creating edge from non-exist node to non-exist node"
-        graph = Graph.Graph(2, {0: [], 1: []})
+        graph = Graph.Graph({0: [], 1: []})
         graph.add_edge(2, 3)
-        self.assertEqual({0: [], 1: [], 2: [3]}, graph.adjacency_list, msg)
+        self.assertEqual({0: [], 1: [], 2: [3], 3: []}, graph.adjacency_list, msg)
 
 
 class TestAlgorithmsGif(unittest.TestCase):
     def test_gif_BFS(self):
         msg = "wrong BFS working from gif"
-        def_dict = defaultdict(list)
-        test_list = [[0, 1, 2], [3], [4], [0], [0]]
-        for i in range(len(test_list)):
-            for elem in test_list[i]:
-                def_dict[i].append(elem)
-
-        test_adj_list = def_dict
-        # print("dict", def_dict)
-        local_graph = Graph.Graph(len(test_adj_list), dict())
-        local_graph.adjacency_list = test_adj_list
-        path = Algorithms.gif(local_graph, 0, Algorithms.BFS, GIF_MAKER_TEST_PATH)
-        self.assertEqual(path, [0, 1, 2, 3, 4], msg=msg)
+        local_graph = Graph.GraphBuilder.create_random_directed_graph()
+        gifs_res = Algorithms.gif(local_graph, 0, Algorithms.BFS)
+        self.assertEqual(str(type(gifs_res[0])), "<class 'imageio.core.util.Array'>", msg=msg)
 
     def test_gif_DFS(self):
         msg = "wrong DFS working from gif"
-        test_list = [[1, 2], [3, 1], [1], [2], [0, 5], [1, 4]]
-        def_dict = defaultdict(list)
-        for i in range(len(test_list)):
-            for elem in test_list[i]:
-                def_dict[i].append(elem)
-        test_adj_list = def_dict
-        local_graph = Graph.Graph(len(test_adj_list), dict())
-        local_graph.adjacency_list = test_adj_list
-        path = Algorithms.gif(local_graph, 0, Algorithms.DFS, GIF_MAKER_TEST_PATH)
-        self.assertEqual(path, [0, 1, 3, 2], msg=msg)
+        local_graph = Graph.GraphBuilder.create_random_directed_graph()
+        gif_res = Algorithms.gif(local_graph, 0, Algorithms.DFS)
+        self.assertEqual(str(type(gif_res[0])), "<class 'imageio.core.util.Array'>", msg=msg)
 
 
 setUp()
+
