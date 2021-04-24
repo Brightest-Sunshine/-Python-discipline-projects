@@ -14,6 +14,7 @@ STYLE = "filled"
 NODE_COLOR = "red"
 LINUX = True
 
+
 @dataclass
 class Graph:
     adjacency_list: defaultdict(list)

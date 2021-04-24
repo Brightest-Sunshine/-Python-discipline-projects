@@ -16,7 +16,6 @@ if __name__ == '__main__':
         GifMaker.save(res_gif, save_paths.pop())
 
 # TODO package sphinx и построим документацию (???)
-# TODO examples
 # TODO rewrite Readme
 # todo Комментарии
 # TODO fix mypy

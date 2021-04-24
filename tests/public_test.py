@@ -62,7 +62,6 @@ class TestAlgorithms(unittest.TestCase):
         self.assertEqual(output, [], msg=msg)
 
 
-
 class TestRunFromCLI(unittest.TestCase):
     def setUp(self):
         self.CLI_default_graph = Graph.RunFromCLI.set_and_run_input(None)
@@ -191,4 +190,3 @@ class TestAlgorithmsGif(unittest.TestCase):
 
 
 setUp()
-
