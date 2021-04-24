@@ -10,6 +10,7 @@ from graph import GifMaker
 LINUX = True
 TEST_PATH = ""
 TEST_EXAMPLES = ""
+ROOT_PATH = ""
 graph = None
 
 
@@ -19,9 +20,11 @@ def setUp():
     timestamp = time.strftime('%Y%m%d-%H%M%S')
     print(timestamp)
     if LINUX:
+        ROOT_PATH = 'tests/'
         TEST_PATH = 'tests/' + timestamp + '/'
         os.makedirs(TEST_PATH, exist_ok=True)
     else:
+        ROOT_PATH = ''
         TEST_PATH = timestamp + '/'
         os.makedirs(TEST_PATH, exist_ok=True)
 
@@ -89,7 +92,7 @@ class TestRunFromCLI(unittest.TestCase):
         self.assertEqual(res, list(this_graph.adjacency_list.keys())[0], msg=self.msg_start_node)
 
     def test_set_and_run_input_not_None(self):
-        this_input = TEST_EXAMPLES + "special_example.txt"
+        this_input = ROOT_PATH + "special_example.txt"
         this_graph = Graph.RunFromCLI.set_and_run_input(this_input)
         self.assertEqual(this_graph.adjacency_list, {1: [2, 0], 2: [3], 3: [0], 0: [5], 5: [1]}, msg=self.msg_input)
 
