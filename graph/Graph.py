@@ -4,7 +4,6 @@ from dataclasses import dataclass
 import argparse
 import numpy as np
 from graphviz import Digraph
-
 from graph import GifMaker
 
 MIN_COUNT_NODES = 6
@@ -13,7 +12,7 @@ NO_WAY = 0
 IS_WAY = 1
 STYLE = "filled"
 NODE_COLOR = "red"
-
+LINUX = True
 
 @dataclass
 class Graph:
@@ -74,7 +73,10 @@ class GraphBuilder:
 
 class RunFromCLI:
     # default_method =  located in set and run because if here, import Errors occurs.
-    default_input = "default_graph.txt"
+    if LINUX:
+        default_input = "tests/default_graph.txt"
+    else:
+        default_input = "default_graph.txt"
     default_output = "result"
 
     @staticmethod
