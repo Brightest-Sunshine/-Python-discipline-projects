@@ -12,7 +12,7 @@ NO_WAY = 0
 IS_WAY = 1
 STYLE = "filled"
 NODE_COLOR = "red"
-LINUX = True
+RUNNING_FROM = "root"  # "root" or "","root" for prod, "" for dev
 
 
 @dataclass
@@ -38,7 +38,7 @@ class Graph:
                 graphviz.node(str(node), fillcolor=NODE_COLOR, style=STYLE)
             for neighbor in graph.adjacency_list.get(node, []):
                 graphviz.edge(str(node), str(neighbor))
-        return graphviz.render(filename=file_name, view=view, cleanup=cleanup)
+        return graphviz.render(filename='_' + file_name, view=view, cleanup=cleanup)
 
 
 class GraphBuilder:
@@ -74,7 +74,7 @@ class GraphBuilder:
 
 class RunFromCLI:  # working with Graph.py calling from command line
     # default_method =  located in set and run because if here, import Errors occurs.
-    if LINUX:
+    if RUNNING_FROM == "root":
         default_input = "tests/default_graph.txt"
     else:
         default_input = "default_graph.txt"
@@ -97,7 +97,7 @@ class RunFromCLI:  # working with Graph.py calling from command line
 
     @staticmethod
     def set_and_run_method(graph, method, start_node_ind, draw):  # run gif with requested method
-        from graph import Algorithms # to avoid cycling
+        from graph import Algorithms  # to avoid cycling
         default_method = Algorithms.DFS
         if method:
             if method == "dfs":
@@ -113,7 +113,7 @@ class RunFromCLI:  # working with Graph.py calling from command line
         return res_gif
 
     @staticmethod
-    def set_and_run_input(input): # check for input in args and read Graph from file
+    def set_and_run_input(input):  # check for input in args and read Graph from file
         if input:
             graph = GraphBuilder.create_from_file(input)
         else:
@@ -121,7 +121,7 @@ class RunFromCLI:  # working with Graph.py calling from command line
         return graph
 
     @staticmethod
-    def set_and_run_output(output, res_gif): # check for output in args and save file
+    def set_and_run_output(output, res_gif):  # check for output in args and save file
         if output:
             GifMaker.save(res_gif, output)
         else:

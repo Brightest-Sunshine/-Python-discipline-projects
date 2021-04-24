@@ -15,6 +15,3 @@ if __name__ == '__main__':
         res_gif = Algorithms.gif(graph, random_node, fun)
         GifMaker.save(res_gif, save_paths.pop())
 
-# TODO package sphinx и построим документацию (???)
-# TODO rewrite Readme
-# todo Комментарии
