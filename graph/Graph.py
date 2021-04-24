@@ -19,7 +19,7 @@ LINUX = True
 class Graph:
     adjacency_list: defaultdict(list)  # type: ignore
 
-    def add_edge(self, from_node, to_node):
+    def add_edge(self, from_node, to_node):  # adding edge from_node to to_node create them if they dont exist
         this = self.adjacency_list.get(from_node, [])
         this.append(to_node)
         self.adjacency_list[from_node] = this
@@ -28,13 +28,13 @@ class Graph:
             self.adjacency_list[to_node] = to
 
     @staticmethod
-    def draw_graph(graph, file_name='Graph', view=False, cleanup=True, visited=None):
+    def draw_graph(graph, file_name='Graph', view=False, cleanup=True, visited=None):  # drawing graph using graphviz
         if visited is None:
             visited = []
         graphviz = Digraph('G', filename=file_name, format='png')
         for node in graph.adjacency_list.keys():
             graphviz.node(str(node))
-            if node in visited:
+            if node in visited:  # mark visited nodes with color
                 graphviz.node(str(node), fillcolor=NODE_COLOR, style=STYLE)
             for neighbor in graph.adjacency_list.get(node, []):
                 graphviz.edge(str(node), str(neighbor))
@@ -44,7 +44,7 @@ class Graph:
 class GraphBuilder:
     @staticmethod
     def create_random_directed_graph():
-        count_nodes = random.randint(MIN_COUNT_NODES, MAX_COUNT_NODES)
+        count_nodes = random.randint(MIN_COUNT_NODES, MAX_COUNT_NODES)  # how many nodes we want
         adj_matrix = np.random.randint(NO_WAY, IS_WAY + 1, size=(count_nodes, count_nodes))  # np.random [first, second)
         adj_list = GraphBuilder.create_adj_list_from_matrix(count_nodes, adj_matrix)
 
@@ -72,7 +72,7 @@ class GraphBuilder:
         return graph
 
 
-class RunFromCLI:
+class RunFromCLI:  # working with Graph.py calling from command line
     # default_method =  located in set and run because if here, import Errors occurs.
     if LINUX:
         default_input = "tests/default_graph.txt"
@@ -81,14 +81,14 @@ class RunFromCLI:
     default_output = "result"
 
     @staticmethod
-    def run_from_file(args):
+    def run_from_file(args):  # launch class pipeline
         graph = RunFromCLI.set_and_run_input(args.input_path)
         start = RunFromCLI.find_start_node(args.starting_node, graph)
         res_gif = RunFromCLI.set_and_run_method(graph, args.method, start, args.draw)
         RunFromCLI.set_and_run_output(args.output_path, res_gif)
 
     @staticmethod
-    def find_start_node(start_node, graph):
+    def find_start_node(start_node, graph):  # checking for start_node in args
         if start_node is None:
             start_node = list(graph.adjacency_list.keys())[0]
         else:
@@ -96,8 +96,8 @@ class RunFromCLI:
         return start_node
 
     @staticmethod
-    def set_and_run_method(graph, method, start_node_ind, draw):
-        from graph import Algorithms
+    def set_and_run_method(graph, method, start_node_ind, draw):  # run gif with requested method
+        from graph import Algorithms # to avoid cycling
         default_method = Algorithms.DFS
         if method:
             if method == "dfs":
@@ -113,8 +113,7 @@ class RunFromCLI:
         return res_gif
 
     @staticmethod
-    def set_and_run_input(input):
-
+    def set_and_run_input(input): # check for input in args and read Graph from file
         if input:
             graph = GraphBuilder.create_from_file(input)
         else:
@@ -122,7 +121,7 @@ class RunFromCLI:
         return graph
 
     @staticmethod
-    def set_and_run_output(output, res_gif):
+    def set_and_run_output(output, res_gif): # check for output in args and save file
         if output:
             GifMaker.save(res_gif, output)
         else:

@@ -18,4 +18,3 @@ if __name__ == '__main__':
 # TODO package sphinx и построим документацию (???)
 # TODO rewrite Readme
 # todo Комментарии
-# TODO fix mypy
