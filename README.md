@@ -72,11 +72,12 @@ To connect all the dependencies, you need to write in the terminal
 The latest version added gif creation from the command line.
 Runs from the project folder
 ```commandline
-    python -m graph.Graph -h //Для помощи
+    python -m graph.Graph -h //For help
     python -m graph.Graph --input_file graph/examples/data/graph_1.txt
     python -m graph.Graph --input_file graph/examples/data/graph_1.txt --output_file my_graph_gif
 
 ```
+![COMMAND_LINE](https://github.com/Brightest-Sunshine/pictures-for-README-files/blob/master/pics/console.jpg)
 ***
 
 # Development team
