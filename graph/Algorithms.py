@@ -1,3 +1,9 @@
+"""
+Algorithms.py
+====================================
+Module containing all graph algo i use in my Graph-rendering project
+"""
+
 import collections
 from typing import Optional
 
@@ -6,12 +12,27 @@ from graph import GifMaker
 
 
 def gif(graph: Graph, node: int, method, draw=False) -> list:
+    """
+
+    :param graph: graph:  class object: The graph in which to run method
+    :param node: int: index of starting node
+    :param method: function: method what used for visualisation
+    :param draw: bool: Make step files during gif creation
+    :return: list(imageio.class): result of imageio working with graph steps during method run
+
+    """
     path = method(graph, node)
     gif_img = GifMaker.build_from_graph(graph, path, draw)
     return gif_img
 
 
 def DFS(graph: Graph, node: int) -> list:
+    """
+    :param graph:  class object: The graph in which to run DFS
+    :param node: int: index of starting node
+    :return: visited: list: index of visited nodes, basically path
+
+    """
     return __DFS(graph, node)
 
 
@@ -38,6 +59,7 @@ def BFS(graph: Graph, node: int) -> list:
     :param graph:  class object: The graph in which to run BFS
     :param node: int: number of node from we run BFS
     :return: list[] path
+
     """
 
     if graph is None or graph.adjacency_list is None:
