@@ -17,7 +17,7 @@ def build_from_graph(graph, order, draw=False):  # Creating list of imageio imag
         steps.append(step)
         img = Graph.Graph.draw_graph(graph, visited=steps, file_name=path_to_img(len(steps)))
         gif_images.append(imageio.imread(img))
-    print("Collect data for gif", )
+    print("Collect data for graph_pass_and_gif", )
     return gif_images
 
 

@@ -12,6 +12,6 @@ if __name__ == '__main__':
     save_paths = ['BFS_res', 'DFS_res']
     for fun in functions:
         random_node = random.choice(list(graph.adjacency_list.keys()))
-        res_gif = Algorithms.gif(graph, random_node, fun)
+        res_gif = Algorithms.graph_pass_and_gif(graph, random_node, fun)
         GifMaker.save(res_gif, save_paths.pop())
 

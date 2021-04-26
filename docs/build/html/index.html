@@ -37,7 +37,7 @@
 <p>Module containing all graph algo i use in my Graph-rendering project</p>
 <dl class="py function">
 <dt id="graph.Algorithms.BFS">
-<code class="sig-prename descclassname"><span class="pre">graph.Algorithms.</span></code><code class="sig-name descname"><span class="pre">BFS</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">graph.Graph.Graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">list</span><a class="reference internal" href="_modules/graph/Algorithms.html#BFS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph.Algorithms.BFS" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">graph.Algorithms.</span></code><code class="sig-name descname"><span class="pre">BFS</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">graph.Graph.Graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">set</span><a class="reference internal" href="_modules/graph/Algorithms.html#BFS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph.Algorithms.BFS" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -46,14 +46,14 @@
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>list[] path</p>
+<dd class="field-even"><p>set[] path</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt id="graph.Algorithms.DFS">
-<code class="sig-prename descclassname"><span class="pre">graph.Algorithms.</span></code><code class="sig-name descname"><span class="pre">DFS</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">graph.Graph.Graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">list</span><a class="reference internal" href="_modules/graph/Algorithms.html#DFS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph.Algorithms.DFS" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">graph.Algorithms.</span></code><code class="sig-name descname"><span class="pre">DFS</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">graph.Graph.Graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">set</span><a class="reference internal" href="_modules/graph/Algorithms.html#DFS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph.Algorithms.DFS" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -68,15 +68,15 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="graph.Algorithms.gif">
-<code class="sig-prename descclassname"><span class="pre">graph.Algorithms.</span></code><code class="sig-name descname"><span class="pre">gif</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">graph.Graph.Graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">draw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">list</span><a class="reference internal" href="_modules/graph/Algorithms.html#gif"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph.Algorithms.gif" title="Permalink to this definition">¶</a></dt>
+<dt id="graph.Algorithms.graph_pass_and_gif">
+<code class="sig-prename descclassname"><span class="pre">graph.Algorithms.</span></code><code class="sig-name descname"><span class="pre">graph_pass_and_gif</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">graph.Graph.Graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">draw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">list</span><a class="reference internal" href="_modules/graph/Algorithms.html#graph_pass_and_gif"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph.Algorithms.graph_pass_and_gif" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>graph</strong> -- graph:  class object: The graph in which to run method</p></li>
 <li><p><strong>node</strong> -- int: index of starting node</p></li>
 <li><p><strong>method</strong> -- function: method what used for visualisation</p></li>
-<li><p><strong>draw</strong> -- bool: Make step files during gif creation</p></li>
+<li><p><strong>draw</strong> -- bool: Make step files during graph_pass_and_gif creation</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>

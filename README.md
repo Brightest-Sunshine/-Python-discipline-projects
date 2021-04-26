@@ -52,14 +52,16 @@ To connect all the dependencies, you need to write in the terminal
 ```
 
 ### GIF creation
+
 ```python
     from graph import Algorithms, Graph, GifMaker
-    graph = Graph.GraphBuilder.create_random_directed_graph()
-    functions = [Algorithms.DFS, Algorithms.BFS]
-    for fun in functions:
-        random_node = random.randint(0, graph.count_nodes - 1)
-        gif = Algorithms.gif(graph, random_node, fun)
-        GifMaker.save(gif, path_to_save)
+
+graph = Graph.GraphBuilder.create_random_directed_graph()
+functions = [Algorithms.DFS, Algorithms.BFS]
+for fun in functions:
+   random_node = random.randint(0, graph.count_nodes - 1)
+   gif = Algorithms.graph_pass_and_gif(graph, random_node, fun)
+   GifMaker.save(gif, path_to_save)
 ```
 
 ### Graph rendering

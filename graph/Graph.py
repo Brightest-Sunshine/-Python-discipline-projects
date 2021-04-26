@@ -15,6 +15,7 @@ NODE_COLOR = "red"
 RUNNING_FROM = "root"  # "root" or "","root" for prod, "" for dev
 
 
+
 @dataclass
 class Graph:
     adjacency_list: defaultdict(list)  # type: ignore
@@ -27,10 +28,13 @@ class Graph:
         if not to:
             self.adjacency_list[to_node] = to
 
+    def get_random_node(self):
+        return random.choice(list(self.adjacency_list.keys()))
+
     @staticmethod
     def draw_graph(graph, file_name='Graph', view=False, cleanup=True, visited=None):  # drawing graph using graphviz
         if visited is None:
-            visited = []
+            visited = {}
         graphviz = Digraph('G', filename=file_name, format='png')
         for node in graph.adjacency_list.keys():
             graphviz.node(str(node))
@@ -61,6 +65,8 @@ class GraphBuilder:
             adjacency_list[column] = adj_nodes
         return adjacency_list
 
+
+
     @staticmethod
     def create_from_file(path):  # Expected format "1 0"
         graph = Graph({})
@@ -83,34 +89,47 @@ class RunFromCLI:  # working with Graph.py calling from command line
     @staticmethod
     def run_from_file(args):  # launch class pipeline
         graph = RunFromCLI.set_and_run_input(args.input_path)
-        start = RunFromCLI.find_start_node(args.starting_node, graph)
+        start = args.start_node if args.start_node else graph.get_random_node()
         res_gif = RunFromCLI.set_and_run_method(graph, args.method, start, args.draw)
         RunFromCLI.set_and_run_output(args.output_path, res_gif)
 
-    @staticmethod
-    def find_start_node(start_node, graph):  # checking for start_node in args
-        if start_node is None:
-            start_node = list(graph.adjacency_list.keys())[0]
-        else:
-            start_node = int(start_node)
-        return start_node
+    # @staticmethod
+    # def find_start_node(start_node, graph):  # checking for start_node in args
+    #     if start_node is None:
+    #         start_node = list(graph.adjacency_list.keys())[0]
+    #     else:
+    #         start_node = int(start_node)
+    #     return start_node
+
+    # @staticmethod
+    # def set_and_run_method(graph, method, start_node_ind, draw):  # run graph_pass_and_gif with requested method
+    #     from graph import Algorithms  # to avoid cycling
+    #     default_method = Algorithms.DFS
+    #     if method:
+    #         if method == "dfs":
+    #             res_gif = Algorithms.graph_pass_and_gif(graph, start_node_ind, Algorithms.DFS, draw=draw)
+    #         elif method == "bfs":
+    #             res_gif = Algorithms.graph_pass_and_gif(graph, start_node_ind, Algorithms.BFS, draw=draw)
+    #         else:
+    #             print("Unknown method, run ", str(default_method), "as default")
+    #             res_gif = Algorithms.graph_pass_and_gif(graph, start_node_ind, default_method, draw=draw)
+    #     else:
+    #         print("No method chosen, run ", str(default_method), "as default")
+    #         res_gif = Algorithms.graph_pass_and_gif(graph, start_node_ind, default_method, draw=draw)
+    #     return res_gif
 
     @staticmethod
-    def set_and_run_method(graph, method, start_node_ind, draw):  # run gif with requested method
-        from graph import Algorithms  # to avoid cycling
-        default_method = Algorithms.DFS
-        if method:
-            if method == "dfs":
-                res_gif = Algorithms.gif(graph, start_node_ind, Algorithms.DFS, draw=draw)
-            elif method == "bfs":
-                res_gif = Algorithms.gif(graph, start_node_ind, Algorithms.BFS, draw=draw)
-            else:
-                print("Unknown method, run ", str(default_method), "as default")
-                res_gif = Algorithms.gif(graph, start_node_ind, default_method, draw=draw)
-        else:
-            print("No method chosen, run ", str(default_method), "as default")
-            res_gif = Algorithms.gif(graph, start_node_ind, default_method, draw=draw)
-        return res_gif
+    def set_and_run_method(graph, alg_name, start_node_ind, draw):
+        from graph import Algorithms
+        methods = {'dfs': Algorithms.DFS, 'bfs': Algorithms.BFS}
+        if alg_name not in methods:
+            raise Exception
+        return RunFromCLI._run_method(graph, start_node_ind, draw, methods[alg_name])
+
+    @staticmethod
+    def _run_method(graph, start_node_ind, draw, method):
+        from graph import Algorithms
+        return Algorithms.graph_pass_and_gif(graph, start_node_ind, method, draw=draw)
 
     @staticmethod
     def set_and_run_input(input):  # check for input in args and read Graph from file
@@ -133,10 +152,10 @@ if __name__ == '__main__':  #
     parser.add_argument('--input_file', dest='input_path', help='path to file with graph'
                                                                 '(default=' + str(RunFromCLI.default_input) + ")")
     parser.add_argument('--method', dest='method', help='choose method to run(bfs/dfs)(default = DFS)')
-    parser.add_argument('--output_file', dest='output_path', help='path to saving gif'
+    parser.add_argument('--output_file', dest='output_path', help='path to saving graph_pass_and_gif'
                                                                   '(default = ' + str(RunFromCLI.default_output) + ")")
-    parser.add_argument('--start', dest='starting_node', help='start method from certain node'
-                                                              '(default=first from node in input file)')
+    parser.add_argument('--start', dest='start_node', help='start method from certain node'
+                                                           '(default=random node)')
     parser.add_argument('--draw', action='store_true', help='making png file of method steps',
                         default=False)
     args = parser.parse_args()

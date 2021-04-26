@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>graph.Algorithms &#8212; Graph somedays documentation</title>
+    <title>graph.Algorithms &#8212; Graph_Rendering somedays documentation</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -44,13 +44,13 @@
 <span class="kn">from</span> <span class="nn">graph</span> <span class="kn">import</span> <span class="n">GifMaker</span>
 
 
-<div class="viewcode-block" id="gif"><a class="viewcode-back" href="../../index.html#graph.Algorithms.gif">[docs]</a><span class="k">def</span> <span class="nf">gif</span><span class="p">(</span><span class="n">graph</span><span class="p">:</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">draw</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<div class="viewcode-block" id="graph_pass_and_gif"><a class="viewcode-back" href="../../index.html#graph.Algorithms.graph_pass_and_gif">[docs]</a><span class="k">def</span> <span class="nf">graph_pass_and_gif</span><span class="p">(</span><span class="n">graph</span><span class="p">:</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">draw</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    :param graph: graph:  class object: The graph in which to run method</span>
 <span class="sd">    :param node: int: index of starting node</span>
 <span class="sd">    :param method: function: method what used for visualisation</span>
-<span class="sd">    :param draw: bool: Make step files during gif creation</span>
+<span class="sd">    :param draw: bool: Make step files during graph_pass_and_gif creation</span>
 <span class="sd">    :return: list(imageio.class): result of imageio working with graph steps during method run</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -59,53 +59,47 @@
     <span class="k">return</span> <span class="n">gif_img</span></div>
 
 
-<div class="viewcode-block" id="DFS"><a class="viewcode-back" href="../../index.html#graph.Algorithms.DFS">[docs]</a><span class="k">def</span> <span class="nf">DFS</span><span class="p">(</span><span class="n">graph</span><span class="p">:</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<div class="viewcode-block" id="DFS"><a class="viewcode-back" href="../../index.html#graph.Algorithms.DFS">[docs]</a><span class="k">def</span> <span class="nf">DFS</span><span class="p">(</span><span class="n">graph</span><span class="p">:</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    :param graph:  class object: The graph in which to run DFS</span>
 <span class="sd">    :param node: int: index of starting node</span>
 <span class="sd">    :return: visited: list: index of visited nodes, basically path</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">__DFS</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">__DFS</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="nb">set</span><span class="p">())</span></div>
 
 
-<span class="k">def</span> <span class="nf">__DFS</span><span class="p">(</span><span class="n">graph</span><span class="p">:</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">visited</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">__DFS</span><span class="p">(</span><span class="n">graph</span><span class="p">:</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">visited</span><span class="p">:</span> <span class="nb">set</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    :param graph: class object: The graph in which to run DFS</span>
 <span class="sd">    :param visited: list: Numbers of visited nodes, basically path</span>
 <span class="sd">    :param node: int: number of the current node</span>
-<span class="sd">    :return visited: list: Numbers of visited nodes, basically path</span>
+<span class="sd">    :return visited: set: Numbers of visited nodes, basically path</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">visited</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># write this way because of mutable default</span>
-        <span class="n">visited</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">if</span> <span class="n">graph</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">graph</span><span class="o">.</span><span class="n">adjacency_list</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">[]</span>
     <span class="k">if</span> <span class="n">node</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
-        <span class="n">visited</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+        <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">neighbour</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">adjacency_list</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
             <span class="n">visited</span> <span class="o">=</span> <span class="n">__DFS</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">neighbour</span><span class="p">,</span> <span class="n">visited</span><span class="o">=</span><span class="n">visited</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">visited</span>
 
 
-<div class="viewcode-block" id="BFS"><a class="viewcode-back" href="../../index.html#graph.Algorithms.BFS">[docs]</a><span class="k">def</span> <span class="nf">BFS</span><span class="p">(</span><span class="n">graph</span><span class="p">:</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<div class="viewcode-block" id="BFS"><a class="viewcode-back" href="../../index.html#graph.Algorithms.BFS">[docs]</a><span class="k">def</span> <span class="nf">BFS</span><span class="p">(</span><span class="n">graph</span><span class="p">:</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    :param graph:  class object: The graph in which to run BFS</span>
 <span class="sd">    :param node: int: number of node from we run BFS</span>
-<span class="sd">    :return: list[] path</span>
+<span class="sd">    :return: set[] path</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">if</span> <span class="n">graph</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">graph</span><span class="o">.</span><span class="n">adjacency_list</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">[]</span>
-    <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span><span class="p">]</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span><span class="p">]</span>
+    <span class="n">visited</span> <span class="o">=</span> <span class="p">{</span><span class="n">node</span><span class="p">}</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="p">{</span><span class="n">node</span><span class="p">}</span>
     <span class="n">queue</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">deque</span><span class="p">([</span><span class="n">node</span><span class="p">])</span>  <span class="c1"># We put the current vertex, and the current color</span>
     <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
         <span class="n">vertex</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">neighbour</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">adjacency_list</span><span class="p">[</span><span class="n">vertex</span><span class="p">]:</span>
             <span class="k">if</span> <span class="n">neighbour</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
-                <span class="n">visited</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">neighbour</span><span class="p">)</span>
-                <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">neighbour</span><span class="p">)</span>  <span class="c1"># Remember that we were here</span>
+                <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">neighbour</span><span class="p">)</span>
+                <span class="n">path</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">neighbour</span><span class="p">)</span>  <span class="c1"># Remember that we were here</span>
                 <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">neighbour</span><span class="p">)</span>  <span class="c1"># Adding a neighbor to then walk out of it</span>
     <span class="k">return</span> <span class="n">path</span></div>
 </pre></div>
@@ -116,7 +110,7 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../../index.html">Graph</a></h1>
+<h1 class="logo"><a href="../../index.html">Graph_Rendering</a></h1>
 
 
 
@@ -159,7 +153,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2021, me.
+      &copy;2021, Vedenichev Dmitry, Mamaeva Anastasiya.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
