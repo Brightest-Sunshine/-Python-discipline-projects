@@ -1,0 +1,5 @@
+flake8
+pytest
+numpy
+graphviz~=0.16
+imageio~=2.9.0
